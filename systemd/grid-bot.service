@@ -1,0 +1,21 @@
+[Unit]
+Description=Grid Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gridbot
+WorkingDirectory=/opt/grid-bot
+EnvironmentFile=/opt/grid-bot/.env
+ExecStart=/opt/grid-bot/.venv/bin/python /opt/grid-bot/grid.py
+Restart=always
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+KillSignal=SIGINT
+TimeoutStopSec=30
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
